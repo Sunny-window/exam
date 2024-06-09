@@ -14,4 +14,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer>{
     
     @Query(value="SELECT s.* FROM student s LEFT JOIN enrollment e ON s.sid = e.sid WHERE e.sno = :sno",nativeQuery = true)
     List<Student> getStudentBySubject(@Param("sno") Integer sno);
+
+    @Query(value="SELECT * FROM student WHERE NAME LIKE %:name%",nativeQuery = true)
+    List<Student> findByName(@Param("name") String name);
 }

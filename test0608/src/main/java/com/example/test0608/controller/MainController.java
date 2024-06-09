@@ -20,4 +20,9 @@ public class MainController {
     public String subjectView(){
         return "subjectview";
     }
+
+    @RequestMapping("/search")
+    public String search(){
+        return "search";
+    }
 }

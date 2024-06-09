@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!-- 폰트 첨부 -->
+    <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <style>
+        .div-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 120px;
+            height: 40px;
+            border: 1px solid black;
+            background-color: white;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 1px 1px 1px 1px black;
+            transition: 0.5s;
+            font-weight: bold;
+        }
+        input{
+            margin:12px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <th:block th:insert="~{/sub/header.html}"></th:block>
+    </header>
+    <section>
+        <!-- <h1> Index page </h1> -->
+        <input type="text" id="student-search" ><br><br>
+
+        <div id="result_list">
+            <!-- 학생 데이터를 불러와서 보여줄 공간 -->
+        </div>
+    </section>
+
+    <script>
+        function a(){
+            var input_value = document.getElementById('student-search').value;
+            
+            fetch('/student-name?name='+input_value)
+            .then(response => response.json())
+            .then(data =>{
+                document.getElementById('result_list').innerHTML = "";
+                for(var i=0; i<data.length; i++){
+                    console.log(i + "번째 검색 결과 : " + data[i].name);
+                    
+                    document.getElementById('result_list').innerHTML 
+                        += '<li>' + data[i].sid + data[i].name + data[i].age + '</li>';
+                } 
+            })
+        }
+        const input_search = document.getElementById('student-search')
+        input_search.addEventListener('change',a);
+        
+    </script>
+</body>
+
+</html>
