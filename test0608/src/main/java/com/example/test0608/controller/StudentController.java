@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.test0608.entity.Student;
@@ -16,6 +17,11 @@ public class StudentController {
     @Autowired
     StudentRepository sr;
     
+    @GetMapping("/students/{sno}")
+    public List<Student> getStudents(@PathVariable("sno") Integer sno) {
+        return sr.getStudentBySubject(sno);
+    }
+
     @GetMapping("/student-all")
     public List<Student> studentAll() {
         return sr.findAll();
