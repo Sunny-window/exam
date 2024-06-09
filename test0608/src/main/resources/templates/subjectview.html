@@ -73,7 +73,7 @@
     <script>
 
         function toggleStudent(sno) {
-            fetch('/students/' + sno)
+            fetch('httP://localhost:9001/students/' + sno)
                 .then(res => res.json())
                 .then(sbj => {
                     document.getElementById('student-subjects' + sno).innerHTML = '';
@@ -90,7 +90,7 @@
         }
 
         function studentList() {
-            fetch('/subject-all')
+            fetch('httP://localhost:9001/subject-all')
                 .then(res => res.json())
                 .then(list => {
                     document.getElementById('subject-list').innerHTML = '';

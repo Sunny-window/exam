@@ -1,4 +1,4 @@
-package com.example.test0608.entity;
+package com.example.test_api_server.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,9 +8,10 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Subject {
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer sno;
+    private Integer sid;
     private String name;
-}   
+    private Integer age;
+}

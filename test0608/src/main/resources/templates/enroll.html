@@ -51,7 +51,7 @@
         const enroll_btn = document.getElementById("enroll-subject");
         
         sbj_check_btn.addEventListener("click", () => {
-            fetch("/subject-all")
+            fetch("httP://localhost:9001/subject-all")
                 .then(res => res.json())
                 .then(sbj => {
                     document.getElementById("select-subject").innerHTML = "";
@@ -71,7 +71,7 @@
             var s_s = document.getElementById("enroll_sid").value;
             var s_v = selected.options[selected.selectedIndex].value;
             // alert(s_s+ '님' + s_v + " 과목 수강 신청")
-            fetch("/enrollment", {
+            fetch("httP://localhost:9001/enrollment", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json;"

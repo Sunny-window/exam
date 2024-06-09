@@ -1,17 +1,19 @@
-package com.example.test0608.controller;
+package com.example.test_api_server.controller;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.test0608.entity.Student;
-import com.example.test0608.repository.StudentRepository;
+import com.example.test_api_server.entity.Student;
+import com.example.test_api_server.repository.StudentRepository;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8080")
 public class StudentController {
 
     @Autowired

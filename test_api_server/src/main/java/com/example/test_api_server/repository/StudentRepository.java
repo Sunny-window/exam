@@ -1,4 +1,4 @@
-package com.example.test0608.repository;
+package com.example.test_api_server.repository;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.example.test0608.entity.Student;
+import com.example.test_api_server.entity.Student;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Integer>{

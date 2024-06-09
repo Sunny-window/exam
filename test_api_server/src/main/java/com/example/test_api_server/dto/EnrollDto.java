@@ -1,4 +1,4 @@
-package com.example.test0608.dto;
+package com.example.test_api_server.dto;
 
 import lombok.Data;
 
