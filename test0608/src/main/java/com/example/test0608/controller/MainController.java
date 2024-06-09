@@ -10,4 +10,14 @@ public class MainController {
     public String root(){
         return "index";
     }
+
+    @RequestMapping("/enroll")
+    public String enroll(){
+        return "enroll";
+    }
+
+    @RequestMapping("/subjectview")
+    public String subjectView(){
+        return "subjectview";
+    }
 }

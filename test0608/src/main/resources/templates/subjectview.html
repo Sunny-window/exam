@@ -36,7 +36,7 @@
             text-align: center;
         }
 
-        #stu-sid {
+        #stu-sno {
             width: 80px;
             border: 1px solid black;
             background-color: white;
@@ -62,7 +62,7 @@
     </header>
     <section>
         <!-- <h1> Index page </h1> -->
-        <div class="div-btn" id="get-list-btn"> <span> 학생 조회 </span> </div>
+        <div class="div-btn" id="get-list-btn"> <span> 과목 조회 </span> </div>
 
         <div id="student-list">
             <!-- 학생 데이터를 불러와서 보여줄 공간 -->
@@ -71,13 +71,13 @@
 
     <script>
 
-        function toggleSubject(sid) {
-            fetch('/subjects/' + sid)
+        function toggleSubject(sno) {
+            fetch('/subjects/' + sno)
                 .then(res => res.json())
                 .then(sbj => {
-                    document.getElementById('student-subjects' + sid).innerHTML = '';
+                    document.getElementById('student-subjects' + sno).innerHTML = '';
                     for (var i = 0; i < sbj.length; i++) {
-                        document.getElementById('student-subjects' + sid).innerHTML
+                        document.getElementById('student-subjects' + sno).innerHTML
                             += '<li class="subject" >'
                             + '<span id="sbj-sno">' + sbj[i].sno + '</span>'
                             + '<span id="sbj-name">' + sbj[i].name + '</span>'
@@ -88,19 +88,18 @@
         }
 
         function studentList() {
-            fetch('/student-all')
+            fetch('/subject-all')
                 .then(res => res.json())
                 .then(list => {
                     document.getElementById('student-list').innerHTML = '';
                     for (var i = 0; i < list.length; i++) {
                         document.getElementById("student-list").innerHTML
-                            // += '<a href="/student?sid='+list[i].sid+'"> <li>'
-                            += '<li class="student-toggle" id="' + list[i].sid + '">'
-                            + '<button id="stu-sid" onclick="toggleSubject(' + list[i].sid + ')">' + list[i].sid + '</button>'
+                            // += '<a href="/student?sno='+list[i].sno+'"> <li>'
+                            += '<li class="student-toggle" id="' + list[i].sno + '">'
+                            + '<button id="stu-sno" onclick="toggleSubject(' + list[i].sno + ')">' + list[i].sno + '</button>'
                             + '<span id="stu-name">' + list[i].name + '</span>'
-                            + '<span id="stu-age">' + list[i].age + '</span>'
                             + '</li>'
-                            + '<div id="student-subjects' + list[i].sid + '"></div>'
+                            + '<div id="student-subjects' + list[i].sno + '"></div>'
                             ;
                     }
                 })

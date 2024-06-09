@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!-- 폰트 첨부 -->
+    <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <style>
+        .div-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 24px;
+            border: 1px solid black;
+            background-color: white;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 1px 1px 1px 1px black;
+            transition: 0.5s;
+            font-weight: bold;
+            margin: 16px 0;
+        }
+
+        #check-subject {
+            width: 160px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <th:block th:insert="~{/sub/header.html}"></th:block>
+    </header>
+    <section>
+        <h1> 수강 신청 </h1>
+        아이디 : <input type="text" id="enroll_sid" placeholder="학생 아이디 입력"><br><br>
+        <div class="div-btn" id="check-subject"> 수강 가능 과목 조회 </div>
+        과목 선택 :
+        <select id="select-subject">
+            <option> 과목 조회를 눌러주세요</option>
+        </select>
+        <br>
+        <div class="div-btn" id="enroll-subject">신청</div>
+    </section>
+
+    <script>
+        const sbj_check_btn = document.getElementById("check-subject");
+        const enroll_btn = document.getElementById("enroll-subject");
+        
+        sbj_check_btn.addEventListener("click", () => {
+            fetch("/subject-all")
+                .then(res => res.json())
+                .then(sbj => {
+                    document.getElementById("select-subject").innerHTML = "";
+                    for (var i = 0; i < sbj.length; i++) {
+                        document.getElementById("select-subject").innerHTML
+                            += '<option value="' + sbj[i].sno + '">'
+                            + sbj[i].name
+                            + '</option>'
+                            ;
+
+                    }
+                })
+        });
+
+        enroll_btn.addEventListener("click", () => {
+            var selected = document.getElementById("select-subject");
+            var s_s = document.getElementById("enroll_sid").value;
+            var s_v = selected.options[selected.selectedIndex].value;
+            // alert(s_s+ '님' + s_v + " 과목 수강 신청")
+            fetch("/enrollment", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json;"
+                },
+                body: JSON.stringify({
+                    eid : null,
+                    sid : s_s,
+                    sno : s_v
+                }),
+            })
+            .then(res => res.text())
+            .then(msg => {
+                alert(msg);
+            })
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,6 +1,7 @@
 package com.example.test0608.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,5 +19,17 @@ public class StudentController {
     @GetMapping("/student-all")
     public List<Student> studentAll() {
         return sr.findAll();
+    }
+
+    @GetMapping("/student")
+    public Student getStudent(Integer sid){
+        Optional<Student> st = sr.findById(sid);
+        if(st.isPresent()){
+            return st.get();
+        }
+        else{
+            // sid값으로 찾은 student 결과가 없을 때 실행할 코드 
+            return null;
+        }
     }
 }
